@@ -1,0 +1,9 @@
+section {
+  width: 960px;
+}
+
+section img {
+  max-width: 300px;
+  display: inline-block;
+  border: solid;
+}
