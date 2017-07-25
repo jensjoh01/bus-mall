@@ -17,7 +17,8 @@ function Image(name) {
 Image.all = [];
 //Store my initial file names
 Image.allNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-Image.altNames = ['R2D2 Bags', 'Banana Slicer', 'Ipad/Toilet Paper Holder', 'Sweet Rain Boots', 'All-in-one breakfast', 'Meatball bubblegum', 'Red Chair', 'Cthulhu', 'Duck face dogie', 'Dragon Meat', 'Pen-Utensil!', 'Pet Sweepers', 'Pizza scissors', 'Shark sleeping bag', 'Sweeping Baby', 'Tauntaun', 'Unicorn Meat', 'USB creature', 'Water Can', 'Wine Glass'];
+
+Image.altNames = ['R2D2 Bags', 'Banana Slicer', 'Ipad/Toilet Paper Holder', 'Sweet Rain Boots', 'All-in-one breakfast', 'Meatball Bubblegum', 'Red Chair', 'Cthulhu', 'Duck Face Dogie', 'Dragon Meat', 'Pen-Utensil!', 'Pet Sweepers', 'Pizza Scissors', 'Shark Sleeping Bag', 'Sweeping Baby', 'Tauntaun', 'Unicorn Meat', 'USB creature', 'Water Can', 'Wine Glass'];
 
 // Create new objects from the file name
 for (var i = 0; i < Image.allNames.length; i++) {
@@ -172,7 +173,6 @@ function randomImageGeneratorClickedImage2() {
       liEl.textContent = Image.all[i].timesClicked + ' for the ' + Image.altNames[i];
       listEl.appendChild(liEl);
     }
-
     return;
   }
 
@@ -190,7 +190,6 @@ function randomImageGeneratorClickedImage2() {
 function randomImageGeneratorClickedImage3() {
 
   Image.all[randomIndex_3_Previous].timesClicked += 1;
-
 
   var randomIndex_1 = Math.floor(Math.random() * Image.all.length);
   var randomIndex_2 = Math.floor(Math.random() * Image.all.length);
@@ -232,7 +231,6 @@ function randomImageGeneratorClickedImage3() {
       liEl.textContent = Image.all[i].timesClicked + ' for the ' + Image.altNames[i];
       listEl.appendChild(liEl);
     }
-
     return;
   }
 
