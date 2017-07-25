@@ -4,6 +4,7 @@ section {
 
 section img {
   max-width: 300px;
+  max-height: 200px;
   display: inline-block;
   border: solid;
 }
