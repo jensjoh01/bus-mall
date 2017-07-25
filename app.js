@@ -1,9 +1,6 @@
 'use strict';
 
-var randomIndex_1_Previous;
-var randomIndex_2_Previous;
-var randomIndex_3_Previous;
-var rounds = 0;
+Image.previousNumber = [];
 
 function Image(name) {
   this.name = name;
@@ -20,232 +17,77 @@ Image.allNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfa
 
 Image.altNames = ['R2D2 Bags', 'Banana Slicer', 'Ipad/Toilet Paper Holder', 'Sweet Rain Boots', 'All-in-one breakfast', 'Meatball Bubblegum', 'Red Chair', 'Cthulhu', 'Duck Face Dogie', 'Dragon Meat', 'Pen-Utensil!', 'Pet Sweepers', 'Pizza Scissors', 'Shark Sleeping Bag', 'Sweeping Baby', 'Tauntaun', 'Unicorn Meat', 'USB creature', 'Water Can', 'Wine Glass'];
 
+Image.clickCount = 0;
+
 // Create new objects from the file name
 for (var i = 0; i < Image.allNames.length; i++) {
-  new Image(Image.allNames[i]);
+  new Image(Image.allNames[i], Image.altNames[i]);
 }
 // Get each of my HTML elements
 Image.imgEl_1 = document.getElementById('image_1');
 Image.imgEl_2 = document.getElementById('image_2');
 Image.imgEl_3 = document.getElementById('image_3');
+Image.container = document.getElementById('container');
+// function to make random number
+function makeRandomNumber() {
+  return Math.floor(Math.random() * Image.all.length);
+}
+// This function assigns the random image source to my Image Id element
+function displayImages() {
+  var number = [];
 
-// Function to take a random number and assign an image
-function randomImageGenerator() {
-  var randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-
-  // Make sure this round is different from last round
-  while(randomIndex_1 === randomIndex_1_Previous || randomIndex_1 === randomIndex_2_Previous || randomIndex_1 === randomIndex_3_Previous){
-    randomIndex_1 = Math.floor(Math.random() * Image.all.length);
+  number[0] = makeRandomNumber();
+  while(number[0] === Image.previousNumber[0] || number[0] === Image.previousNumber[1] || number[0] === Image.previousNumber[2]) {
+    number[0] = makeRandomNumber();
   }
-  while(randomIndex_2 === randomIndex_1_Previous || randomIndex_2 === randomIndex_2_Previous || randomIndex_2 === randomIndex_3_Previous){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
+  number[1] = makeRandomNumber();
+  while (number[1] === number[0] || number[1] === Image.previousNumber[0] || number[1] === Image.previousNumber[1] || number[1] === Image.previousNumber[2]){
+    number[1] = makeRandomNumber();
   }
-  while(randomIndex_3 === randomIndex_1_Previous || randomIndex_3 === randomIndex_2_Previous || randomIndex_3 === randomIndex_3_Previous){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
+  number[2] = makeRandomNumber();
+  while (number[2] === number[0] || number[2] === number[1] || number[2] === Image.previousNumber[0] || number[2] === Image.previousNumber[1] || number[2] === Image.previousNumber[2]) {
+    number[2] = makeRandomNumber();
   }
-  // Makes sure random #2 is unique
-  while(randomIndex_2 === randomIndex_1){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #3 is unique
-  while(randomIndex_3 === randomIndex_1 || randomIndex_3 === randomIndex_2){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
+  Image.imgEl_1.src = Image.all[number[0]].source;
+  Image.imgEl_2.src = Image.all[number[1]].source;
+  Image.imgEl_3.src = Image.all[number[2]].source;
 
-  Image.imgEl_1.src = Image.all[randomIndex_1].source;
-  Image.imgEl_2.src = Image.all[randomIndex_2].source;
-  Image.imgEl_3.src = Image.all[randomIndex_3].source;
+  Image.imgEl_1.alt = Image.altNames[number[0]];
+  Image.imgEl_2.alt = Image.altNames[number[1]];
+  Image.imgEl_3.alt = Image.altNames[number[2]];
 
-  Image.all[randomIndex_1].timesShown += 1;
-  Image.all[randomIndex_2].timesShown += 1;
-  Image.all[randomIndex_3].timesShown += 1;
+  Image.all[number[0]].timesShown += 1;
+  Image.all[number[1]].timesShown += 1;
+  Image.all[number[2]].timesShown += 1;
 
-  rounds += 1;
-
-  randomIndex_1_Previous = (randomIndex_1);
-  randomIndex_2_Previous = (randomIndex_2);
-  randomIndex_3_Previous = (randomIndex_3);
+  Image.previousNumber = number;
 }
 
-//++++++++++++++++++++ function when left most image clicked ++++++++++++++++++++++++++++++
+// ++++++++++++++++++++ Event Handler ++++++++++++++++++++++++++++++
 
-function randomImageGeneratorClickedImage1() {
-
-  Image.all[randomIndex_1_Previous].timesClicked += 1;
-
-  var randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-
-  // Make sure this round is different from last round
-  while(randomIndex_1 === randomIndex_1_Previous || randomIndex_1 === randomIndex_2_Previous || randomIndex_1 === randomIndex_3_Previous){
-    randomIndex_1 = Math.floor(Math.random() * Image.all.length);
+function clickHandler(e) {
+  if(e.target.id === 'container'){
+    return alert('Please click on an image!');
   }
-  while(randomIndex_2 === randomIndex_1_Previous || randomIndex_2 === randomIndex_2_Previous || randomIndex_2 === randomIndex_3_Previous){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  while(randomIndex_3 === randomIndex_1_Previous || randomIndex_3 === randomIndex_2_Previous || randomIndex_3 === randomIndex_3_Previous){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #2 is unique
-  while(randomIndex_2 === randomIndex_1){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #3 is unique
-  while(randomIndex_3 === randomIndex_1 || randomIndex_3 === randomIndex_2){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
+  Image.clickCount ++;
 
-  Image.imgEl_1.src = Image.all[randomIndex_1].source;
-  Image.imgEl_2.src = Image.all[randomIndex_2].source;
-  Image.imgEl_3.src = Image.all[randomIndex_3].source;
-
-  rounds += 1;
-
-  if(rounds === 26){
-    document.getElementById('image_1').removeEventListener('click', randomImageGeneratorClickedImage1);
-    document.getElementById('image_2').removeEventListener('click', randomImageGeneratorClickedImage2);
-    document.getElementById('image_3').removeEventListener('click', randomImageGeneratorClickedImage3);
-
-    for(var i = 0; i < Image.all.length; i++){
+  for(var i = 0; i < Image.all.length; i++){
+    if(e.target.alt === Image.altNames[i]){
+      Image.all[i].timesClicked += 1;
+    }
+  }
+  if(Image.clickCount < 3){
+    displayImages();
+  } else {
+    for(var j = 0; j < Image.all.length; j++){
       var listEl = document.getElementById('list');
       var liEl = document.createElement('li');
-      liEl.textContent = Image.all[i].timesClicked + ' for the ' + Image.altNames[i];
+      liEl.textContent = Image.all[j].timesClicked + ' for the ' + Image.altNames[j];
       listEl.appendChild(liEl);
     }
-    return;
+    document.getElementById('container').removeEventListener('click', clickHandler);
   }
-
-  Image.all[randomIndex_1].timesShown += 1;
-  Image.all[randomIndex_2].timesShown += 1;
-  Image.all[randomIndex_3].timesShown += 1;
-
-  randomIndex_1_Previous = (randomIndex_1);
-  randomIndex_2_Previous = (randomIndex_2);
-  randomIndex_3_Previous = (randomIndex_3);
 }
 
-//++++++++++++++++++++++ Function when middle image is clicked +++++++++++++++++++++++++++++++++++++++
-
-function randomImageGeneratorClickedImage2() {
-
-  Image.all[randomIndex_2_Previous].timesClicked += 1;
-
-  var randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-
-  // Make sure this round is different from last round
-  while(randomIndex_1 === randomIndex_1_Previous || randomIndex_1 === randomIndex_2_Previous || randomIndex_1 === randomIndex_3_Previous){
-    randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  }
-  while(randomIndex_2 === randomIndex_1_Previous || randomIndex_2 === randomIndex_2_Previous || randomIndex_2 === randomIndex_3_Previous){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  while(randomIndex_3 === randomIndex_1_Previous || randomIndex_3 === randomIndex_2_Previous || randomIndex_3 === randomIndex_3_Previous){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #2 is unique
-  while(randomIndex_2 === randomIndex_1){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #3 is unique
-  while(randomIndex_3 === randomIndex_1 || randomIndex_3 === randomIndex_2){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
-
-  Image.imgEl_1.src = Image.all[randomIndex_1].source;
-  Image.imgEl_2.src = Image.all[randomIndex_2].source;
-  Image.imgEl_3.src = Image.all[randomIndex_3].source;
-
-  rounds += 1;
-
-  if(rounds === 26){
-    document.getElementById('image_1').removeEventListener('click', randomImageGeneratorClickedImage1);
-    document.getElementById('image_2').removeEventListener('click', randomImageGeneratorClickedImage2);
-    document.getElementById('image_3').removeEventListener('click', randomImageGeneratorClickedImage3);
-
-    for(var i = 0; i < Image.all.length; i++){
-      var listEl = document.getElementById('list');
-      var liEl = document.createElement('li');
-      liEl.textContent = Image.all[i].timesClicked + ' for the ' + Image.altNames[i];
-      listEl.appendChild(liEl);
-    }
-    return;
-  }
-
-  Image.all[randomIndex_1].timesShown += 1;
-  Image.all[randomIndex_2].timesShown += 1;
-  Image.all[randomIndex_3].timesShown += 1;
-
-  randomIndex_1_Previous = (randomIndex_1);
-  randomIndex_2_Previous = (randomIndex_2);
-  randomIndex_3_Previous = (randomIndex_3);
-}
-
-//++++++++++++++++++++++ function when right-most image is clicked +++++++++++++++++++++++++++
-
-function randomImageGeneratorClickedImage3() {
-
-  Image.all[randomIndex_3_Previous].timesClicked += 1;
-
-  var randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  var randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-
-  // Make sure this round is different from last round
-  while(randomIndex_1 === randomIndex_1_Previous || randomIndex_1 === randomIndex_2_Previous || randomIndex_1 === randomIndex_3_Previous){
-    randomIndex_1 = Math.floor(Math.random() * Image.all.length);
-  }
-  while(randomIndex_2 === randomIndex_1_Previous || randomIndex_2 === randomIndex_2_Previous || randomIndex_2 === randomIndex_3_Previous){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  while(randomIndex_3 === randomIndex_1_Previous || randomIndex_3 === randomIndex_2_Previous || randomIndex_3 === randomIndex_3_Previous){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #2 is unique
-  while(randomIndex_2 === randomIndex_1){
-    randomIndex_2 = Math.floor(Math.random() * Image.all.length);
-  }
-  // Makes sure random #3 is unique
-  while(randomIndex_3 === randomIndex_1 || randomIndex_3 === randomIndex_2){
-    randomIndex_3 = Math.floor(Math.random() * Image.all.length);
-  }
-
-  Image.imgEl_1.src = Image.all[randomIndex_1].source;
-  Image.imgEl_2.src = Image.all[randomIndex_2].source;
-  Image.imgEl_3.src = Image.all[randomIndex_3].source;
-
-  rounds += 1;
-
-  if(rounds === 26){
-    document.getElementById('image_1').removeEventListener('click', randomImageGeneratorClickedImage1);
-    document.getElementById('image_2').removeEventListener('click', randomImageGeneratorClickedImage2);
-    document.getElementById('image_3').removeEventListener('click', randomImageGeneratorClickedImage3);
-
-    for(var i = 0; i < Image.all.length; i++){
-      var listEl = document.getElementById('list');
-      var liEl = document.createElement('li');
-      liEl.textContent = Image.all[i].timesClicked + ' for the ' + Image.altNames[i];
-      listEl.appendChild(liEl);
-    }
-    return;
-  }
-
-  Image.all[randomIndex_1].timesShown += 1;
-  Image.all[randomIndex_2].timesShown += 1;
-  Image.all[randomIndex_3].timesShown += 1;
-
-  randomIndex_1_Previous = (randomIndex_1);
-  randomIndex_2_Previous = (randomIndex_2);
-  randomIndex_3_Previous = (randomIndex_3);
-}
-
-document.getElementById('image_1').addEventListener('click', randomImageGeneratorClickedImage1);
-document.getElementById('image_2').addEventListener('click', randomImageGeneratorClickedImage2);
-document.getElementById('image_3').addEventListener('click', randomImageGeneratorClickedImage3);
-
-
-randomImageGenerator();
+document.getElementById('container').addEventListener('click', clickHandler);
+displayImages();
