@@ -9,6 +9,7 @@ function Image(name) {
   this.timesShown = 0;
   this.timesClicked = 0;
   Image.all.push(this);
+  // Image.votes = [];
 }
 
 // Store my objects, need to call by parameter name
@@ -20,15 +21,16 @@ Image.altNames = ['R2D2 Bags', 'Banana Slicer', 'Ipad/Toilet Paper Holder', 'Swe
 
 Image.clickCount = 0;
 
-// Create new objects from the file name
-for (var i = 0; i < Image.allNames.length; i++) {
-  new Image(Image.allNames[i], Image.altNames[i]);
-}
+// // Create new objects from the file name
+// for (var i = 0; i < Image.allNames.length; i++) {
+//   new Image(Image.allNames[i], Image.altNames[i]);
+// }
 // Get each of my HTML elements
 Image.imgEl_1 = document.getElementById('image_1');
 Image.imgEl_2 = document.getElementById('image_2');
 Image.imgEl_3 = document.getElementById('image_3');
 Image.container = document.getElementById('container');
+
 // function to make random number
 function makeRandomNumber() {
   return Math.floor(Math.random() * Image.all.length);
@@ -78,16 +80,14 @@ function clickHandler(e) {
     }
   }
   if(Image.clickCount < 25){
+    var x = Image.all;
+    var xStringy = JSON.stringify(x);
+    localStorage.setItem('xStringy', xStringy);
     displayImages();
   } else {
     document.getElementById('container').removeEventListener('click', clickHandler);
   }
 }
-
-// function randomColors() {
-//   var color = Math.floor(Math.random() * 200);
-//   return color;
-// }
 
 function drawChart(){
   // document.getElementById('myChart').innerHTML = ;
@@ -147,7 +147,7 @@ function drawChart(){
       }]
     },
     options: {
-      responsive: false,
+      // responsive: false,
       scales: {
         xAxes: [{
           ticks: {
@@ -168,9 +168,31 @@ function showList() {
   }
 }
 
-document.getElementById('container').addEventListener('click', clickHandler);
-displayImages();
+function clearStorage() {
+  localStorage.clear();
+  displayImages();
+  console.log('local storage cleared');
+}
+
+if(localStorage.getItem('xStringy') !== null) {
+  console.log('I found data');
+  var xFromStorage = localStorage.getItem('xStringy');
+  var xNotStringy = JSON.parse(xFromStorage);
+  Image.all = xNotStringy;
+  for(var i = 0; i < Image.all.length; i++){
+    Image.votes[i] = Image.all[i].timesClicked;
+  }
+} else {
+  console.log('no data, making new instances.');
+//  Create new objects from the file name
+  for (var i = 0; i < Image.allNames.length; i++) {
+    new Image(Image.allNames[i], Image.altNames[i]);
+  }
+}
+
 
 document.getElementById('draw-chart').addEventListener('click', drawChart);
-
 document.getElementById('display-list').addEventListener('click', showList);
+document.getElementById('container').addEventListener('click', clickHandler);
+document.getElementById('clear-storage').addEventListener('click', clearStorage);
+displayImages();
