@@ -15,18 +15,26 @@ section img {
   border: solid;
 }
 
-#image_1 {
-
-}
-
-#image_2 {
-
-}
-
-#image_3 {
-
-}
-
 #list {
   text-align: left;
+  display: inline-block;
+}
+
+#myChart {
+  position: relative;
+  top: 30px;
+  display: inline-block;
+  /*background-color: lightgrey;*/
+}
+
+#draw-chart {
+  position: absolute;
+  margin-top: 5px;
+  left: 500px;
+}
+
+#display-list {
+  position: absolute;
+  margin-top: 5px;
+  left: 450px;
 }

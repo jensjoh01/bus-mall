@@ -3,19 +3,27 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <title>Bus Mall</title>
   </head>
   <body>
-    <p>Please select which image you would prefer to buy</p>
+    <p>Please select which image you would prefer to buy:</p>
 
     <section id = "container">
       <img id = "image_1" src="img/bag.jpg" />
       <img id = "image_2" src="img/banana.jpg" />
       <img id = "image_3" src="img/bathroom.jpg" />
+    </section>
 
       <ul id = "list">
       </ul>
-    </section>
+
+      <button id = "draw-chart">Chart</button>
+      <button id = "display-list">List</button>
+
+      <canvas id="myChart" width="800" height="400"></canvas>
+
+
 
     <script src="app.js"></script>
   </body>
