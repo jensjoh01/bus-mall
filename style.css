@@ -1,40 +1,29 @@
-p {
-  text-align: center;
-}
 
-section {
-  width: 960px;
-  text-align: center;
-}
+h1 { text-align: center;}
 
-section img {
-  max-width: 250px;
-  max-height: 200px;
-  margin: 30px 30px;
-  display: inline-block;
+p { text-align: center;}
+
+#container {
+  width: 100%;
+  height: 320px;
+  margin: auto;
+  text-align: center;
   border: solid;
 }
 
-#list {
-  text-align: left;
-  display: inline-block;
+section img {
+  max-width: 25%;
+  max-height: 300px;
+  margin: 10px 40px;
+  border: solid blue;
 }
 
-#myChart {
-  position: relative;
-  top: 30px;
-  display: inline-block;
-  /*background-color: lightgrey;*/
+#buttons {
+  width: 100%;
+  margin: 10px 0px;
+  text-align: center;
 }
 
-#draw-chart {
-  position: absolute;
-  margin-top: 5px;
-  left: 500px;
-}
+#draw-chart {}
 
-#display-list {
-  position: absolute;
-  margin-top: 5px;
-  left: 450px;
-}
+#display-list {}
