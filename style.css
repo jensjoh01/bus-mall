@@ -1,40 +1,44 @@
-p {
-  text-align: center;
-}
 
-section {
-  width: 960px;
+h1 { text-align: center;}
+
+p { text-align: center;}
+
+#container {
+  height: 320px;
+  margin: 0 auto;
   text-align: center;
+  border: solid;
+  position: relative;
 }
 
 section img {
-  max-width: 250px;
+  max-width: 25%;
   max-height: 200px;
-  margin: 30px 30px;
-  display: inline-block;
-  border: solid;
+  margin: 10px 40px;
+  border: solid blue;
+  vertical-align: middle;
+  border-radius: 10px;
+  padding: 20px;
 }
 
-#list {
-  text-align: left;
-  display: inline-block;
-}
-
-#myChart {
+#image_1 {
   position: relative;
-  top: 30px;
-  display: inline-block;
-  /*background-color: lightgrey;*/
 }
 
-#draw-chart {
-  position: absolute;
-  margin-top: 5px;
-  left: 500px;
+#image_2 {
+  position: relative;
 }
 
-#display-list {
-  position: absolute;
-  margin-top: 5px;
-  left: 450px;
+#image_3 {
+  position: relative;
 }
+
+#buttons {
+  width: 100%;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+#draw-chart {}
+
+#display-list {}
