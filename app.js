@@ -9,7 +9,6 @@ function Image(name) {
   this.timesShown = 0;
   this.timesClicked = 0;
   Image.all.push(this);
-  // Image.votes = [];
 }
 
 // Store my objects, need to call by parameter name
@@ -21,10 +20,6 @@ Image.altNames = ['R2D2 Bags', 'Banana Slicer', 'Ipad/Toilet Paper Holder', 'Swe
 
 Image.clickCount = 0;
 
-// // Create new objects from the file name
-// for (var i = 0; i < Image.allNames.length; i++) {
-//   new Image(Image.allNames[i], Image.altNames[i]);
-// }
 // Get each of my HTML elements
 Image.imgEl_1 = document.getElementById('image_1');
 Image.imgEl_2 = document.getElementById('image_2');
@@ -80,9 +75,7 @@ function clickHandler(e) {
     }
   }
   if(Image.clickCount < 25){
-    var x = Image.all;
-    var xStringy = JSON.stringify(x);
-    localStorage.setItem('xStringy', xStringy);
+    localStorage.setItem('Image.all', JSON.stringify(Image.all));
     displayImages();
   } else {
     document.getElementById('container').removeEventListener('click', clickHandler);
@@ -170,15 +163,19 @@ function showList() {
 
 function clearStorage() {
   localStorage.clear();
-  displayImages();
+  var myChartEl = document.getElementById('myChart');
+  myChartEl.remove();
+  var canvasParent = document.getElementById('canvas-parent');
+  var newCanvas = document.createElement('canvas');
+  newCanvas.innerHTML = '';
+  canvasParent.appendChild(newCanvas);
+
   console.log('local storage cleared');
 }
 
-if(localStorage.getItem('xStringy') !== null) {
+if(localStorage.getItem('Image.all') !== null) {
   console.log('I found data');
-  var xFromStorage = localStorage.getItem('xStringy');
-  var xNotStringy = JSON.parse(xFromStorage);
-  Image.all = xNotStringy;
+  Image.all = JSON.parse(localStorage.getItem('Image.all'));
   for(var i = 0; i < Image.all.length; i++){
     Image.votes[i] = Image.all[i].timesClicked;
   }

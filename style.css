@@ -5,18 +5,32 @@ p { text-align: center;}
 
 #container {
   height: 320px;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
   border: solid;
+  position: relative;
 }
 
 section img {
   max-width: 25%;
-  max-height: 300px;
+  max-height: 200px;
   margin: 10px 40px;
   border: solid blue;
   vertical-align: middle;
   border-radius: 10px;
+  padding: 20px;
+}
+
+#image_1 {
+  position: relative;
+}
+
+#image_2 {
+  position: relative;
+}
+
+#image_3 {
+  position: relative;
 }
 
 #buttons {
